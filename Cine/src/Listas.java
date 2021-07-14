@@ -23,7 +23,7 @@ public class Listas {
 
         System.out.println();
 
-        for (int i = 0; i < listaNumeros.size(); i++){
+        for (int i = 0; i < listaNumeros.size();i++){
             System.out.println(listaNumeros.get(i));
         }
 
@@ -41,7 +41,7 @@ public class Listas {
         }
 
     public void mostrarClientes() {
-        for (int i = 0; i < listaClientes.size(); i++){
+        for (int i = 0; i < listaClientes.size();++i){
             System.out.println(listaClientes.get(i).getNombre());
         }
     }
