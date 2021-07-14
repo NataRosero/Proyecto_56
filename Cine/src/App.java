@@ -5,6 +5,7 @@ public class App {
         System.out.println("Bienvenidos al cine");
         System.out.println();
 
+
         // Cliente Uno
 
         Cliente clienteUno = new Cliente();
@@ -15,7 +16,6 @@ public class App {
         String cedula = scan1.nextLine();
         System.out.println("¿Cuál es tu nombre? ");
         String nombre = scan1.nextLine();
-        scan.close();
 
         clienteUno.setCedula(cedula);
         clienteUno.setNombre(nombre);
@@ -46,6 +46,36 @@ public class App {
                             + "\nPrecio entrada: " + precioDos);
         clienteDos.saludar("Buenos días "); //Opción 2 de saludar
         clienteDos.mostrarDatos();
+
+        //Pruebas con listas
+
+        Listas listas = new Listas();
+        listas.crearLista();
+
+
+        int opcion = 0;
+        while (opcion == 0){
+            System.out.println("¿Cuál es tu número de cédula? ");
+            cedula = scan1.nextLine();
+            System.out.println("¿Cuál es tu nombre? ");
+            nombre = scan1.nextLine();
+            System.out.println("¿Cuál es tu ID? ");
+            int id = scan1.nextInt();
+
+            Cliente nuevoCliente = new Cliente();
+            nuevoCliente.setCedula(cedula);
+            nuevoCliente.setNombre(nombre);
+            nuevoCliente.setId(id);
+            
+            listas.agregarCliente(nuevoCliente);
+
+            System.out.println("¿Desea agregar otro cliente? (0 continuar, 1 para salir )");
+            opcion = scan1.nextInt();
+            System.out.println();
+
+        }
+        listas.mostrarClientes();
+
     }
 
 }
