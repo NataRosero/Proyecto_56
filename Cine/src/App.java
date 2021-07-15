@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class App {
     public static void main(String[] args) throws Exception {
-        System.out.println("Bienvenidos al cine");
+        System.out.println("Bienvenidos al cine Lista de clientes");
         System.out.println();
 
 
@@ -53,7 +53,7 @@ public class App {
         listas.crearLista();
 
 
-        int opcion = 0;
+        /* int opcion = 0;
         while (opcion == 0){
             System.out.println("¿Cuál es tu número de cédula? ");
             cedula = scan1.nextLine();
@@ -74,7 +74,32 @@ public class App {
             System.out.println();
 
         }
-        listas.mostrarClientes();
+        */
+
+        String opcion = "S";
+        while (opcion.equalsIgnoreCase("S")){ //No import si es minuscula o mayuscula
+            System.out.println("¿Cuál es tu número de cédula? ");
+            cedula = scan1.next(); //Uso del next, solo lee la linea y se queda ahi 
+            scan1.nextLine();//solo es el salto de line de escritura
+            System.out.println("¿Cuál es tu nombre? ");
+            nombre = scan1.nextLine();
+            System.out.println("¿Cuál es tu ID? ");
+            int id = scan1.nextInt();
+
+            Cliente nuevoCliente = new Cliente();
+            nuevoCliente.setCedula(cedula);
+            nuevoCliente.setNombre(nombre);
+            nuevoCliente.setId(id);
+            
+            listas.agregarCliente(nuevoCliente);
+
+            System.out.println("¿Desea agregar otro cliente? (S continuar, N para salir )");
+            opcion = scan1.next();
+            System.out.println();
+
+        }
+        //listas.mostrarClientes();
+        listas.mostrarDatosclientes();
 
     }
 

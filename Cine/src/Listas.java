@@ -42,8 +42,21 @@ public class Listas {
 
     public void mostrarClientes() {
         for (int i = 0; i < listaClientes.size();++i){
-            System.out.println(listaClientes.get(i).getNombre());
+            System.out.println(listaClientes.get(i).getNombre() + listaClientes.get(i).getCedula() );
         }
+    }
+
+    public void mostrarDatosclientes(){
+        String cadenaClientes = "";
+        System.out.println("\nDatos de los clientes");
+        for (int i = 0; i < listaClientes.size(); i++){
+            String datos = "\nEl cliente: " + listaClientes.get(i).getNombre()
+                            + ", con número de cédula: " + listaClientes.get(i).getCedula()
+                            + " y ID número: " + listaClientes.get(i).getId()
+                            + "\n---------------------------------------------------";
+            cadenaClientes = cadenaClientes.concat(datos); //le concatena una nueva cadena de datos con cada iteración
+        }
+        System.out.println(cadenaClientes);
     }
 
 }

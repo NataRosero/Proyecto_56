@@ -1,9 +1,9 @@
 public class Cliente extends Persona implements Tiquete{
 
-    private int id;
+    private int id; //datos privados
 
     public void setId(int id) {
-        this.id = id;
+        this.id = id; //no hay ningún tipo de retorno
     }
 
     public int getId() {
