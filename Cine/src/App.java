@@ -53,7 +53,7 @@ public class App {
         listas.crearLista();
 
 
-        /* int opcion = 0;
+        int opcion = 0;
         while (opcion == 0){
             System.out.println("¿Cuál es tu número de cédula? ");
             cedula = scan1.nextLine();
@@ -67,17 +67,20 @@ public class App {
             nuevoCliente.setNombre(nombre);
             nuevoCliente.setId(id);
             
-            listas.agregarCliente(nuevoCliente);
+
+            Cliente nuevoClienteUno = new Cliente(cedula, nombre, id);
+            
+            listas.agregarCliente(nuevoClienteUno);
 
             System.out.println("¿Desea agregar otro cliente? (0 continuar, 1 para salir )");
             opcion = scan1.nextInt();
             System.out.println();
 
         }
-        */
+        
 
-        String opcion = "S";
-        while (opcion.equalsIgnoreCase("S")){ //No import si es minuscula o mayuscula
+        String opcion1 = "S";
+        while (opcion1.equalsIgnoreCase("S")){ //No import si es minuscula o mayuscula
             System.out.println("¿Cuál es tu número de cédula? ");
             cedula = scan1.next(); //Uso del next, solo lee la linea y se queda ahi 
             scan1.nextLine();//solo es el salto de line de escritura
@@ -94,7 +97,7 @@ public class App {
             listas.agregarCliente(nuevoCliente);
 
             System.out.println("¿Desea agregar otro cliente? (S continuar, N para salir )");
-            opcion = scan1.next();
+            opcion1 = scan1.next();
             System.out.println();
 
         }
@@ -102,5 +105,7 @@ public class App {
         listas.mostrarDatosclientes();
 
     }
+
+
 
 }
