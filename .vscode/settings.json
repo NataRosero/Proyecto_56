@@ -1,7 +1,8 @@
 {
     "files.autoSave": "onFocusChange",
     "java.project.sourcePaths": [
+        "Reto1/Reto_1/src",
         "Cine/src",
-        "Reto1/Reto_1/src"
+        "Ejercicios_Practica/Ejerecicios/src"
     ]
 }
