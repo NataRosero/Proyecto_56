@@ -99,6 +99,7 @@ public class App {
             System.out.println("¿Desea agregar otro cliente? (S continuar, N para salir )");
             opcion1 = scan1.next();
             System.out.println();
+        scan1.close();
 
         }
         //listas.mostrarClientes();

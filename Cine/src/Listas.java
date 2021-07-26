@@ -18,6 +18,7 @@ public class Listas {
             numero = scan2.nextInt();
             if (numero >= 0) {
                 listaNumeros.add(numero);
+            scan2.close();
             }
         }
 
@@ -55,8 +56,10 @@ public class Listas {
                             + " y ID número: " + listaClientes.get(i).getId()
                             + "\n---------------------------------------------------";
             cadenaClientes = cadenaClientes.concat(datos); //le concatena una nueva cadena de datos con cada iteración
+        
         }
         System.out.println(cadenaClientes);
+    
     }
 
 }
