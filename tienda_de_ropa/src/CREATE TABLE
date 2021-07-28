@@ -3,3 +3,89 @@ CREATE TABLE Clientes (
     nombres varchar(20),
     apellidos varchar (30)
 );
+
+CREATE TABLE Marcas (
+    codigoMarca INTEGER,
+    Nombre text(30),
+    CONSTRAINT Marcas_pk PRIMARY KEY (codigoMarca)
+);
+/*tabla con la llave foranea*/
+CREATE TABLE Productos (
+    codigoBarras varchar(20) PRIMARY KEY,
+    nombre varchar(20),
+    precio float,
+    talla varchar (4),
+    color varchar (15),
+    genero varchar (10),
+    cantidadDisponible int,
+    idMarca int,
+    CONSTRAINT FK_marcaProducto FOREIGN KEY (idMarca) REFERENCES Marcas (codigoMarca)
+);
+
+/* Sentencia insert
+INSERT INTO Clientes VALUES ("1111102455", "Juan", "Perez Rodríguez");
+Si necesitas cargar varios datos debes cargarlos con esa estructura y luego ejecutas en el Dbeaver.
+
+BUSCAR TODOS LOS DATOS
+SELECT * FROM Clientes;
+
+BUSCAR SOLO UNA COLUMNA DE LA BASE DE DATOS
+SELECT * FROM Clientes;
+
+BUSCAR DOS COLUMNAS
+SELECT identficacion, apellidos FROM Clientes;
+
+//El orden en que colocas las columnas es como van a aparecer estas columnas tienen alias
+SELECT nombres AS Apodo, identificacion As Id FROM Clientes;
+
+Agregar columna edad
+ALTER TABLE Clientes ADD edad int;
+
+Eliminar Columna edad
+ALTER TABLE Clientes DROP COLUM edad; 
+
+Borrar tabla completa
+DROP TABLE nombre_tabla
+
+Borrar información de la tabla pero no la estructura
+TRUNCATE TABLE nombre_tabla
+
+UNIR DOS TABLAS PARA VISUALIZACIÓN //Lsa barras sirven para concatenar 
+SELECT identificacion As Id, nombres||" "|| apellidos As "Nombre completo" FROM Clientes;
+
+SELECCIONAR SIN VALORES REPETIDOS
+SELECT  DISTINCT nombres FROM Clientes;
+
+BUSCAR UN DATO ESPECÍFICO
+SELECT  * FROM  Clientes WHERE identificacion = 4730126;
+//Recuerda que si es texto debes colocar el texto ente comillas ''
+SELECT  * FROM  Clientes WHERE nombres = "Andrea" OR nombres = 'Glenna';
+//Utilizando OR, pero tambien puedes utilizar AND
+
+BUSCAR DATO SIN QUE SEA TAN ESTRICTO ES DECIR QUE LO CONTENGA
+%nombre al principio Que comienzan con...
+nombre% al final Que terminan con...
+%nombre% para decir que debe estar no import si es al pricipio o al final
+SELECT  * FROM  Clientes WHERE nombres LIKE '%Andrea%' ;
+
+PARA NEGAR UTILIZA NOT
+
+ORDEN ALFABETICO O POR CANTIDAD, EN CASO DE DATOS REPETIDOS SE DEFINE POR EL SEGUNDO DATO
+SELECT  identificacion , apellidos, nombres FROM  Clientes ORDER BY apellidos ;
+SELECT  identificacion , apellidos, nombres FROM  Clientes ORDER BY apellidos, nombres ; //EN ESTE CASO ES NOMBRE, PERO PUEDES COLOCAR TODOS LOS QUE QUIERAS
+
+ORDEN DE ABAJO HACIA ARRIBA COLOCA AL FINAL DEL DATO DESC
+SELECT  identificacion , apellidos, nombres FROM  Clientes ORDER BY apellidos DESC ;
+
+CONTAR DATOS
+SELECT  COUNT(*) FROM Clientes;
+// en el asterisco * puedes colocar el nombre de una columna pra contarla
+
+Ejemplo rebuscdo de busqueda
+SELECT  COUNT(*) AS "Conteo Clientes" FROM Clientes WHERE nombres LIKE "%Andrea%";
+
+COLOCAR EN MAYÚSCULA
+SELECT  UPPER(nombres) FROM Clientes;
+
+SIEMPRE PRSIONA F5 PARA ACTUALIZAR
+*/

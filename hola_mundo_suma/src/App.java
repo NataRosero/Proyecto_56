@@ -86,3 +86,7 @@ import java.awt.*;
 System.out.println("El primer programa");
 rect.mover(10, 20);
 */ 
+
+Suma suma = new Suma;{
+
+}
