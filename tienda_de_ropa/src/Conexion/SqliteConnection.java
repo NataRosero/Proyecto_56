@@ -2,6 +2,7 @@ package Conexion;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -27,9 +28,24 @@ public class SqliteConnection {
 
     public ResultSet ejecutarConsulta(String consulta) {
         ResultSet rs = null;
+        //consulta = "SELECT * FROM Productos"
         try {
         Statement stmt = conn.createStatement();
         rs = stmt.executeQuery(consulta);
+
+        } catch (SQLException e) {
+            System.err.println(e);
+        }
+        return rs;
+    }
+
+    public ResultSet ejecutarSentencia(String sentencia) {
+        int nFilas = 0;
+        //consulta = "SELECT * FROM Productos"
+        try {
+        Statement stmt = conn.createStatement();
+        PreparedStatement pstm = conn.prepareStatement(sentencia);
+        nFilas = pstm.executeUpdate();
 
         } catch (SQLException e) {
             System.err.println(e);
