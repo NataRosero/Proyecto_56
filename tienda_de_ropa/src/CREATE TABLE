@@ -30,7 +30,7 @@ BUSCAR TODOS LOS DATOS
 SELECT * FROM Clientes;
 
 BUSCAR SOLO UNA COLUMNA DE LA BASE DE DATOS
-SELECT * FROM Clientes;
+SELECT identificacion FROM Clientes;
 
 BUSCAR DOS COLUMNAS
 SELECT identficacion, apellidos FROM Clientes;
@@ -79,7 +79,7 @@ SELECT  identificacion , apellidos, nombres FROM  Clientes ORDER BY apellidos DE
 
 CONTAR DATOS
 SELECT  COUNT(*) FROM Clientes;
-// en el asterisco * puedes colocar el nombre de una columna pra contarla
+// en el asterisco * puedes colocar el nombre de una columna para contarla
 
 Ejemplo rebuscdo de busqueda
 SELECT  COUNT(*) AS "Conteo Clientes" FROM Clientes WHERE nombres LIKE "%Andrea%";
@@ -88,4 +88,77 @@ COLOCAR EN MAYÚSCULA
 SELECT  UPPER(nombres) FROM Clientes;
 
 SIEMPRE PRSIONA F5 PARA ACTUALIZAR
+
+Operaciones bases de datos
+SELECT FLOOR (MAX (salary)) as maximum , FLOOR (MIN(salary)) as minimum , FLOOR (SUM(salary)) AS Suma , FLOOR (AVG(salary)) AS Average from employees
+SELECT job_title as Título , min_salary as Minimum , max_salary as Maximum, FLOOR (min_salary + max_salary) AS Suma , FLOOR ((min_salary + max_salary)/2) AS Average from jobs; 
+SELECT * FROM  employees WHERE job_id = 13; 
+
+Selecciona datos de otras tablas
+SELECT nombres||" "|| apellidos AS Nombre, idCliente, COUNT(*) AS "Cantidad de ventas", SUM(total) AS "Dinero gastado" 
+FROM Ventas v JOIN Clientes c ON v.idCliente = c.identificacion WHERE idCliente = '14832939';
+
+Conteo por grupo
+SELECT genero, COUNT(genero) AS Cantidad FROM Productos GROUP BY genero; 
+
+CONTEO Y ORDEN POR CANTIDAD
+SELECT talla, COUNT(talla) AS Cantidad FROM Productos GROUP BY talla ORDER BY (cantidad); 
+conteo y suma
+SELECT TALLA, SUM (cantidadDisponible) FROM Productos GROUP BY talla ORDER BY cantidadDisponible ; 
+
+VALORES PRMEDIO DEBAJO DE 40000
+SELECT nombre , AVG (precio) as "Precio Promedio" FROM Productos GROUP BY nombre HAVING "Precio Promedio" < 40000 ORDER BY precio ; 
+
+Busqueda specifica de un producto
+SELECT nombre, genero, talla, COUNT(*) AS "Cantidad", AVG(precio) AS "Precio promedio", SUM(cantidadDisponible) AS "Cantidad en inventario"
+FROM Productos
+GROUP BY nombre, genero, talla HAVING nombre = "Jean" and cantidadDisponible < 9; 
+
+SELECIONAR LOS DATOS NULOS EN DOS TABLAS (SIRVE PARA VER LAS PERSONAS QUE NO HAN COMPRADO)
+SELECT nombres||" "|| apellidos AS Nombre, v.codigoVenta , c.identificacion 
+FROM Clientes c LEFT JOIN  Ventas v ON v.idCliente = c.identificacion
+WHERE v.codigoVenta  IS NULL ;
+
+SUBCONSULTA ESPECIFICA (PRODUCTOS CON PRECIO MAYOR A LA CAMISA BLANCA)
+//RECOMENDACIÓN HACER PRIMERO LA SUBCONSULTA Y DESPUES EL RESTO
+
+SELECT codigoBarras , nombre, color,  cantidadDisponible AS "Cantidad Disponible" , precio 
+FROM Productos WHERE precio >
+								(SELECT precio FROM  Productos 
+									WHERE nombre = 'Camisa' AND color = 'Blanco' AND talla = 'XL') ; 
+
+Consulta con group by
+SELECT COUNT(nombre) as "Cantidad de productos", nombre, color,  cantidadDisponible AS "Cantidad Disponible" , AVG(precio) 
+FROM Productos WHERE precio >
+								(SELECT precio FROM  Productos 
+									WHERE nombre = 'Camisa' AND color = 'Blanco' AND talla = 'XL') 
+GROUP BY nombre ; 
+
+Consulta de precios mayor al precio promedio
+SELECT nombre, FLOOR(AVG(precio)) AS "Precio promedio" FROM Productos GROUP BY nombre
+HAVING "Precio promedio" > (
+						SELECT AVG(precio) FROM Productos
+); 
+
+CONSULTA PRODUCTOS QUE HA COMPADO TARA TYSON
+SELECT identificacion, c.nombres || " " || c.apellidos AS Nombre, p.nombre AS "Producto", m.nombre as Marca, p.precio as Precio 
+FROM Clientes c JOIN Ventas v ON c.identificacion = v.idCliente JOIN VentasProductos vp ON v.codigoVenta = vp.idVenta 
+JOIN Productos p on vp.idProducto = p.codigoBarras JOIN Marcas m on m.codigoMarca = p.idMarca 
+WHERE nombres = 'Tara' AND apellidos = 'Tyson'
+VARIANTE
+SELECT COUNT(vp.cantidad) AS "Cantidad de ventas" , p.nombre AS "Producto", m.nombre as Marca, FLOOR(AVG(p.precio)) as "Precio Promedio" 
+FROM Clientes c JOIN Ventas v ON c.identificacion = v.idCliente JOIN VentasProductos vp ON v.codigoVenta = vp.idVenta 
+JOIN Productos p on vp.idProducto = p.codigoBarras JOIN Marcas m on m.codigoMarca = p.idMarca GROUP BY marca
+
+ACTUALZIAR PRECIOS POR CODIGO SQL
+UPDATE Productos 
+SET precio = 35000
+WHERE codigoBarras = '4535'
+
+BORRAR UN DATO
+DELETE FROM Clientes 
+WHERE identificacion = 6790987
 */
+
+
+
