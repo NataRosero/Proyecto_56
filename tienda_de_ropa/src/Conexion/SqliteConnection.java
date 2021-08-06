@@ -1,4 +1,5 @@
-package Conexion;
+
+package conexion;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -28,29 +29,26 @@ public class SqliteConnection {
 
     public ResultSet ejecutarConsulta(String consulta) {
         ResultSet rs = null;
-        //consulta = "SELECT * FROM Productos"
         try {
-        Statement stmt = conn.createStatement();
-        rs = stmt.executeQuery(consulta);
-
+            Statement stmt = conn.createStatement();
+            rs = stmt.executeQuery(consulta);
         } catch (SQLException e) {
             System.err.println(e);
         }
         return rs;
     }
 
-    public ResultSet ejecutarSentencia(String sentencia) {
+    public int ejecutarSentencia(String sentencia) {
         int nFilas = 0;
-        //consulta = "SELECT * FROM Productos"
         try {
-        Statement stmt = conn.createStatement();
-        PreparedStatement pstm = conn.prepareStatement(sentencia);
-        nFilas = pstm.executeUpdate();
-
+            PreparedStatement pstmt = conn.prepareStatement(sentencia);
+            nFilas = pstmt.executeUpdate();
         } catch (SQLException e) {
             System.err.println(e);
         }
-        return rs;
+        return nFilas;
     }
 
 }
+
+

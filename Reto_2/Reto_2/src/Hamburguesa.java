@@ -1,20 +1,56 @@
 public class Hamburguesa {
 
-    String adicional;
-    int tamanoN = 0;
-    double precioBase = 5000;
-    double precioGeneral = 0;
-    private String tamano;
-    private boolean cebolla;
-    private int adicionalN;
+    static final double PRECIO_BASE = 5000;
+    static final String TAMANO = "Normal";
+    static final boolean CEBOLLA = false;
+    protected String tamano;
+    protected Boolean cebolla;
+    protected double precioBase;
+    protected String adicional;
 
-    public Hamburguesa(String adicional, int tamanoN, int adicionalN, double precioBase, String tamano, boolean cebolla) {
-    this.adicional = adicional;
-    this.tamanoN = tamanoN;
-    this.adicionalN = adicionalN;
-    this.precioBase = precioBase;
-    this.tamano = tamano;
-    this.cebolla = cebolla;
+    public Hamburguesa(){
+
+    }
+
+    public static double isPrecioBase() {
+        return PRECIO_BASE;
+    }
+
+    public static boolean isCebolla() {
+        return CEBOLLA;
+    }
+
+    public Boolean getCebolla() {
+        return cebolla;
+    }
+
+    public void setCebolla(Boolean cebolla) {
+        this.cebolla = cebolla;
+    }
+
+    public double getPrecioBase() {
+        return precioBase;
+    }
+
+    public void setPrecioBase(double precioBase) {
+        this.precioBase = precioBase;
+    }
+
+    public Hamburguesa(String tamano, boolean cebolla) {
+
+        switch(tamano) {
+            case "Normal":
+                this.tamano = tamano;
+                int tamanoN = 1; 
+                break;
+            case "Doble":
+                this.tamano = tamano;
+                tamanoN = 2; 
+                break;
+            default:
+                this.tamano = tamano;
+                tamanoN = 1;
+            }  
     }
 
     public void setTamano(String tamano) {
@@ -25,18 +61,7 @@ public class Hamburguesa {
         return this.tamano;
     }
 
-    public void tamanoF(String tamano){
-    switch(tamano) {
-        case "Normal":
-            tamanoN = 1; 
-            break;
-        case "Doble":
-            tamanoN = 2; 
-            break;
-        default:
-            tamanoN = 1;
-        }  
-    }
+
 
 
         // tamano.equalsIgnoreCase(tamano);
@@ -48,24 +73,19 @@ public class Hamburguesa {
         //         break;}
 
     public void agregarAdicional(String adicional) {
-        this.adicional = adicional;
 
         switch(adicional) {
             case "Tocineta":
-                adicionalN = 3000; 
+                this.adicional = adicional;
+                int adicionalN = 3000; 
                 break;
             case "Jalapeños":
+                this.adicional = adicional;
                 adicionalN = 2000; 
                 break;
         }
     }
-    public void setAdicional(String adicional) {
-        this.adicional = adicional; 
-    }
 
-    public int getAdicional() {
-        return this.adicionalN;
-    }
 
     @Override
     public double calcularPrecio() {

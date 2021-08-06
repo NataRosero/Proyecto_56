@@ -1,4 +1,4 @@
-public class HamburguesaNormal implements Hamburguesa {
+public class HamburguesaNormal extends Hamburguesa {
     int valorCarne = 0;
     double precioBase = 5000;
 
