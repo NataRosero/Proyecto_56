@@ -12,6 +12,21 @@ public class Hamburguesa {
 
     }
 
+//Constructor Sobrecargado
+    public Hamburguesa(String tamano, boolean cebolla) {
+        if (tamano != ""){
+            this.tamano = tamano;
+        } else {
+            this.tamano = TAMANO;
+        }
+        if (cebolla = true){
+            this.cebolla = cebolla;
+        } else {
+            this.cebolla = CEBOLLA;
+        }
+        this.precioBase = PRECIO_BASE;
+    }
+
     public static double isPrecioBase() {
         return PRECIO_BASE;
     }
@@ -36,60 +51,29 @@ public class Hamburguesa {
         this.precioBase = precioBase;
     }
 
-    public Hamburguesa(String tamano, boolean cebolla) {
-
-        switch(tamano) {
-            case "Normal":
-                this.tamano = tamano;
-                int tamanoN = 1; 
-                break;
-            case "Doble":
-                this.tamano = tamano;
-                tamanoN = 2; 
-                break;
-            default:
-                this.tamano = tamano;
-                tamanoN = 1;
-            }  
-    }
-
-    public void setTamano(String tamano) {
-        this.tamano = tamano; 
-    }
-
-    String getTamano() {
-        return this.tamano;
-    }
-
-
-
-
-        // tamano.equalsIgnoreCase(tamano);
-        // if (tamano.equalsIgnoreCase("Normal"));{
-        //     tamanoN = 1;
-        //     break;
-        // } else if (tamano.equalsIgnoreCase("Doble"));{
-        //     tamanoN = 2; 
-        //         break;}
-
     public void agregarAdicional(String adicional) {
-
-        switch(adicional) {
-            case "Tocineta":
-                this.adicional = adicional;
-                int adicionalN = 3000; 
-                break;
-            case "Jalapeños":
-                this.adicional = adicional;
-                adicionalN = 2000; 
-                break;
-        }
+        this.adicional = adicional;
     }
 
-
-    @Override
     public double calcularPrecio() {
-    precioGeneral = (precioBase * tamanoN) + adicionalN;
-    return precioGeneral;
-    }
+        double precioGeneral = 0;
+        int tamanoNum = 0;
+        double adicionalN = 0; 
+
+        if (this.adicional.equalsIgnoreCase("Tocineta")){
+            adicionalN = 3000;
+        }
+        if (this.adicional.equalsIgnoreCase("Jalapeños")){
+            adicionalN = 2000;
+        }
+        if (this.tamano.equalsIgnoreCase("Normal")){
+            tamanoNum = 1;
+        }
+        if (this.tamano.equalsIgnoreCase("Doble")){
+            tamanoNum = 2;
+        }
+
+        precioGeneral = (this.precioBase * tamanoNum) + adicionalN;
+        return precioGeneral;
+        }
 }
