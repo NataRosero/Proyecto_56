@@ -1,12 +1,7 @@
 public class HamburguesaNormal extends Hamburguesa {
-    static final double PRECIO_BASE = 5000;
-    static final String TAMANO = "Normal";
-    static final boolean CEBOLLA = false;
+
     static final String TIPO_CARNE = "Res";
-    protected String tamano;
-    protected Boolean cebolla;
-    protected double precioBase;
-    protected String adicional;
+
     protected String tipoCarne;
 
     public HamburguesaNormal(){
@@ -31,6 +26,7 @@ public class HamburguesaNormal extends Hamburguesa {
             this.tipoCarne= TIPO_CARNE;
         }
         this.precioBase = PRECIO_BASE;
+        this.adicional = ADICIONAL;
     }
 
     public Boolean getCebolla() {
@@ -63,6 +59,7 @@ public class HamburguesaNormal extends Hamburguesa {
 
 // Métodos
 // Método calcularPrecio
+@Override
 public double calcularPrecio() {
     double precioHamburguesa = 0;
     double precioGeneral = 0;
@@ -90,7 +87,7 @@ public double calcularPrecio() {
     if (this.tipoCarne.equalsIgnoreCase("Pollo apanado")){
         valorCarne = 7000;
     }
-
+    precioGeneral = (this.precioBase * tamanoNum) + adicionalN;
     precioHamburguesa = precioGeneral + valorCarne;
     return precioHamburguesa;
     }

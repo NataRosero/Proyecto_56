@@ -1,12 +1,7 @@
 public class HamburguesaPatacon extends Hamburguesa {
-    static final double PRECIO_BASE = 5000;
-    static final String TAMANO = "Normal";
-    static final boolean CEBOLLA = false;
+
     static final String TIPO_PATACON = "Maduro";
-    protected String tamano;
-    protected Boolean cebolla;
-    protected double precioBase;
-    protected String adicional;
+
     protected String tipoPatacon;
 
     public HamburguesaPatacon(){
@@ -31,6 +26,7 @@ public class HamburguesaPatacon extends Hamburguesa {
             this.tipoPatacon= TIPO_PATACON;
         }
         this.precioBase = PRECIO_BASE;
+        this.adicional = ADICIONAL;
     }
 
     public Boolean getCebolla() {
@@ -88,7 +84,7 @@ public class HamburguesaPatacon extends Hamburguesa {
         if (this.tipoPatacon.equalsIgnoreCase("Verde")){
             valorPatacon = 3000;
         }
-
+        precioGeneral = (this.precioBase * tamanoNum) + adicionalN;
         precioHamburguesa = precioGeneral + valorPatacon;
         return precioHamburguesa;
     }

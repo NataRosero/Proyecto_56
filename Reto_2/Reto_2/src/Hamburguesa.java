@@ -3,6 +3,7 @@ public class Hamburguesa {
     static final double PRECIO_BASE = 5000;
     static final String TAMANO = "Normal";
     static final boolean CEBOLLA = false;
+    static final String ADICIONAL = "No";
     protected String tamano;
     protected Boolean cebolla;
     protected double precioBase;
@@ -25,15 +26,9 @@ public class Hamburguesa {
             this.cebolla = CEBOLLA;
         }
         this.precioBase = PRECIO_BASE;
+        this.adicional = ADICIONAL;
     }
 
-    public static double isPrecioBase() {
-        return PRECIO_BASE;
-    }
-
-    public static boolean isCebolla() {
-        return CEBOLLA;
-    }
 
     public Boolean getCebolla() {
         return cebolla;

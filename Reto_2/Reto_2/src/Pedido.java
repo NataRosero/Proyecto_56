@@ -34,14 +34,18 @@ public class Pedido  {
    // Método calcularTotales
    public void calcularTotales() {
       for (int ham = 0; ham < listaHamburguesas.length; ham++){
-         if (listaHamburguesas [ham] instanceof Hamburguesa){
-            precioTotalHamburguesas += listaHamburguesas[ham].calcularPrecio();
-         }
-         if (listaHamburguesas [ham] instanceof HamburguesaNormal){
-            precioTotalHamburguesasNormal += listaHamburguesas[ham].calcularPrecio();
-         }
+         double precioham = 0;
+
          if (listaHamburguesas [ham] instanceof HamburguesaPatacon){
-            precioTotalHamburguesasPatacon += listaHamburguesas[ham].calcularPrecio();
+            precioham = listaHamburguesas[ham].calcularPrecio();
+            precioTotalHamburguesasPatacon += precioham;
+            precioTotalHamburguesas += precioham;
+         }else if(listaHamburguesas [ham] instanceof HamburguesaNormal){
+            precioham = listaHamburguesas[ham].calcularPrecio();
+            precioTotalHamburguesasNormal += precioham;
+            precioTotalHamburguesas += precioham;
+         }else{
+            precioTotalHamburguesas += listaHamburguesas[ham].calcularPrecio();
          }
       }
    }
