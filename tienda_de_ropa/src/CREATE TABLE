@@ -58,7 +58,7 @@ SELECT  DISTINCT nombres FROM Clientes;
 
 BUSCAR UN DATO ESPECÍFICO
 SELECT  * FROM  Clientes WHERE identificacion = 4730126;
-//Recuerda que si es texto debes colocar el texto ente comillas ''
+//Recuerda que si es texto debes colocar el texto ente comillas '' simples
 SELECT  * FROM  Clientes WHERE nombres = "Andrea" OR nombres = 'Glenna';
 //Utilizando OR, pero tambien puedes utilizar AND
 

@@ -1,0 +1,17 @@
+SELECT Documento_Identidad, Nombre, Primer_Apellido, Ciudad_Residencia from Lider LIMIT 100;
+
+SELECT mc.Nombre_Material , mc.Precio_Unidad , p.ID_Proyecto 
+FROM Proyecto p JOIN Compra c ON p.ID_Proyecto = c.ID_Proyecto 
+JOIN MaterialConstruccion mc ON c.ID_MaterialConstruccion = mc.ID_MaterialConstruccion
+WHERE Ciudad = 'Ibague' AND mc.Importado = 'Si' LIMIT 100; 
+
+SELECT Proveedor, COUNT(Cantidad) AS Ventas FROM Compra  GROUP BY Proveedor ORDER BY Ventas DESC LIMIT 100;
+
+SELECT p.ID_Proyecto, p.Numero_Habitaciones, t.Estrato FROM Proyecto p 
+JOIN Tipo t ON p.ID_Tipo = t.ID_Tipo WHERE Numero_Habitaciones < 3 LIMIT 100;
+
+
+
+SELECT p.Constructora , SUM(l.Salario) AS 'Costo de líderes' FROM Lider l 
+JOIN Proyecto p ON l.ID_Lider = p.ID_Lider GROUP BY p.Constructora
+HAVING (SUM(l.Salario) > 40000000) LIMIT 100;
