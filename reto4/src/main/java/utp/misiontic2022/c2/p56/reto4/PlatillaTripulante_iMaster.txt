@@ -1,0 +1,328 @@
+/*
+ * Pueda usar esta plantilla para la carga del reto a iMaster
+ * Copie las clases de los paquetes Modelo, Vista, Controlador y Util
+ * No incluya los import de los archivos .java solo las clases
+ */
+// Importaciones necesarias en iMaster
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.sql.PreparedStatement;
+
+// Util (No modificar)
+public class JDBCUtilities {
+    private static final String DATABASE_LOCATION = "ProyectosConstruccion.db";
+    private Connection conn;
+
+    public JDBCUtilities () {
+        try {
+            getConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public Connection getConnection() throws SQLException {
+        String url = "jdbc:sqlite:"+DATABASE_LOCATION;
+        conn = DriverManager.getConnection(url);
+        return conn;
+    }
+
+    public ResultSet ejecutarConsulta(String consulta) {
+        ResultSet rs = null;
+        try {
+            Statement stmt = conn.createStatement();
+            rs = stmt.executeQuery(consulta);
+        } catch (SQLException e) {
+            System.err.println(e);
+        }
+        return rs;
+    }
+
+    public int ejecutarSentencia(String sentencia) {
+        int nFilas = 0;
+        try {
+            PreparedStatement pstmt = conn.prepareStatement(sentencia);
+            nFilas = pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.err.println(e);
+        }
+        return nFilas;
+    }
+}
+
+// Remplace en adelante por las clases de sus archivos .java
+
+// Vista
+
+public class VistaRequerimientos {
+
+    public static final ControladorRequerimientos controlador = new ControladorRequerimientos();
+
+    public static void requerimiento1(){
+        System.out.println("Nombre material-Precio unidad-Id del proyecto");
+        try {
+            ArrayList<Requerimiento_1> resultados = controlador.consultarRequerimiento1();
+            for (Requerimiento_1 r: resultados){
+                System.out.println(r.getNombre_Material() + "-$" +  r.getPrecio_Unidad() + "-" + r.getiD_Proyecto());
+            }
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+    }
+
+    public static void requerimiento2(){
+        System.out.println("Proveedor-Ventas");
+        try {
+            ArrayList<Requerimiento_2> resultados = controlador.consultarRequerimiento2();
+            for (Requerimiento_2 r: resultados){
+                System.out.println(r.getProveedor() + "-" +  r.getVentas());
+            }
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+    }
+
+    public static void requerimiento3(){
+        System.out.println("Constructora - Costo de líderes");
+        try {
+            ArrayList<Requerimiento_3> resultados = controlador.consultarRequerimiento3();
+            for (Requerimiento_3 r: resultados){
+                System.out.println(r.getConstructora() + "-" +  r.getCostoLideres());
+            }
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+    }
+
+}
+
+
+// Controlador
+
+public class ControladorRequerimientos {
+
+    public ArrayList<Requerimiento_1> consultarRequerimiento1() throws SQLException {
+        Requerimiento_1Dao r1 = new Requerimiento_1Dao();
+        return r1.requerimiento1();
+    }
+
+    public ArrayList<Requerimiento_2> consultarRequerimiento2() throws SQLException {
+        Requerimiento_2Dao r2 = new Requerimiento_2Dao();
+        return r2.requerimiento2();
+    }
+
+    public ArrayList<Requerimiento_3> consultarRequerimiento3() throws SQLException {
+        Requerimiento_3Dao r3 = new Requerimiento_3Dao();
+        return r3.requerimiento3();
+    }
+}
+
+
+// Modelo
+// VO
+
+public class Requerimiento_1 {
+    private String nombre_Material;
+    private int precio_Unidad;
+    private int iD_Proyecto;
+
+    public void requerimiento_1 (String nombre_Material, int precio_Unidad, int iD_Proyecto){
+        this.nombre_Material = nombre_Material;
+        this.precio_Unidad = precio_Unidad;
+        this.iD_Proyecto = iD_Proyecto;
+        
+    }
+
+    public String getNombre_Material() {
+        return nombre_Material;
+    }
+
+    public void setNombre_Material(String nombre_Material) {
+        this.nombre_Material = nombre_Material;
+    }
+
+    public int getPrecio_Unidad() {
+        return precio_Unidad;
+    }
+
+    public void setPrecio_Unidad(int precio_Unidad) {
+        this.precio_Unidad = precio_Unidad;
+    }
+
+    public int getiD_Proyecto() {
+        return iD_Proyecto;
+    }
+
+    public void setiD_Proyecto(int iD_Proyecto) {
+        this.iD_Proyecto = iD_Proyecto;
+    }
+
+    
+
+}
+
+
+
+public class Requerimiento_2 {
+    private String proveedor;
+    private int ventas;
+
+    public void requerimiento_2 (String proveedor, int ventas){
+        this.proveedor = proveedor;
+        this.ventas = ventas;
+    }
+
+    public String getProveedor() {
+        return proveedor;
+    }
+
+    public void setProveedor(String proveedor) {
+        this.proveedor = proveedor;
+    }
+
+    public int getVentas() {
+        return ventas;
+    }
+
+    public void setVentas(int ventas) {
+        this.ventas = ventas;
+    }
+
+
+}
+
+
+public class Requerimiento_3 {
+
+    private String constructora;
+    private int costoLideres;
+
+    public void requerimiento_3 (String constructora, int costoLideres){
+        this.constructora = constructora;
+        this.costoLideres = costoLideres;
+    }
+
+    public String getConstructora() {
+        return constructora;
+    }
+
+    public void setConstructora(String constructora) {
+        this.constructora = constructora;
+    }
+
+    public int getCostoLideres() {
+        return costoLideres;
+    }
+
+    public void setCostoLideres(int costoLideres) {
+        this.costoLideres = costoLideres;
+    }
+
+}
+
+
+// DAO
+
+public class Requerimiento_1Dao {
+    private String nombre_Material;
+    private int precio_Unidad;
+    private int iD_Proyecto;
+
+    public ArrayList<Requerimiento_1> requerimiento1() throws SQLException {
+        ArrayList<Requerimiento_1> resultados = new ArrayList<>();
+        JDBCUtilities conexion = new JDBCUtilities();
+
+        try{
+        String sentencia =  "SELECT mc.Nombre_Material As 'Nombre material'  , mc.Precio_Unidad As 'Precio unidad' , p.ID_Proyecto As 'ID del Proyecto' " +
+                            "FROM Proyecto p JOIN Compra c ON p.ID_Proyecto = c.ID_Proyecto " +
+                            "JOIN MaterialConstruccion mc ON c.ID_MaterialConstruccion = mc.ID_MaterialConstruccion " +
+                            "WHERE Ciudad = 'Ibague' AND mc.Importado = 'Si' LIMIT 100 "; 
+        ResultSet consulta = conexion.ejecutarConsulta(sentencia);
+
+
+                while (consulta.next()) {
+                    Requerimiento_1 requerimiento_1 = new Requerimiento_1();
+                    nombre_Material = consulta.getString ("Nombre material");
+                    precio_Unidad = consulta.getInt("Precio unidad");
+                    iD_Proyecto = consulta.getInt("ID del Proyecto");
+                    requerimiento_1.requerimiento_1(nombre_Material, precio_Unidad, iD_Proyecto);
+                
+                    resultados.add (requerimiento_1);
+                }
+            } catch (Exception e) {
+                System.err.println(e);
+            }
+            return resultados;
+
+    }
+
+
+}
+
+
+
+public class Requerimiento_2Dao {
+    private String proveedor;
+    private int ventas;
+
+
+    public ArrayList<Requerimiento_2> requerimiento2() throws SQLException {
+        ArrayList<Requerimiento_2> resultados = new ArrayList<>();
+        JDBCUtilities conexion = new JDBCUtilities();
+
+        try{
+            String sentencia =  "SELECT Proveedor, COUNT(Cantidad) AS 'Ventas' FROM Compra  GROUP BY Proveedor ORDER BY Ventas DESC LIMIT 100"; 
+            ResultSet consulta = conexion.ejecutarConsulta(sentencia);
+
+                    while (consulta.next()) {
+                        Requerimiento_2 requerimiento_2 = new Requerimiento_2();
+                        proveedor = consulta.getString ("Proveedor");
+                        ventas = consulta.getInt("Ventas");
+                        requerimiento_2.requerimiento_2(proveedor, ventas);
+                    
+                        resultados.add (requerimiento_2);
+                    }
+                } catch (Exception e) {
+                    System.err.println(e);
+                }
+
+        return resultados;
+    }
+}
+
+
+public class Requerimiento_3Dao {
+
+    private String constructora;
+    private int costoLideres;
+
+    public ArrayList<Requerimiento_3> requerimiento3() throws SQLException {
+        ArrayList<Requerimiento_3> resultados = new ArrayList<>();
+        JDBCUtilities conexion = new JDBCUtilities();
+
+        try{
+            String sentencia = "SELECT p.Constructora AS 'Constructora' , SUM(l.Salario) AS 'Costo de líderes' FROM Lider l " +
+            "JOIN Proyecto p ON l.ID_Lider = p.ID_Lider GROUP BY p.Constructora " +
+            "HAVING (SUM(l.Salario) > 40000000) LIMIT 100"; 
+            ResultSet consulta = conexion.ejecutarConsulta(sentencia);
+
+                    while (consulta.next()) {
+                        Requerimiento_3 requerimiento_3 = new Requerimiento_3();
+                        constructora = consulta.getString ("Constructora");
+                        costoLideres = consulta.getInt("Costo de líderes");
+                        requerimiento_3.requerimiento_3(constructora, costoLideres);
+                    
+                        resultados.add (requerimiento_3);
+                    }
+                } catch (Exception e) {
+                    System.err.println(e);
+                }
+
+
+        return resultados;
+    }
+}
